@@ -100,17 +100,17 @@ Github does not serve ads as it's business model revolves around selling premium
 
 \begin{enumerate}
 \item Google analytics sticks cookies %Which cookies and what do they do?
-\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. 
+\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of identifying information enough to make me distinct in a pool of $5,000,000$ people.
 \end{enumerate}
 
 
 \section{CSP}
 
-Content security policy csp
+Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains such names as
 
 
 
-\section{SSL}
+\section{SSL Everywhere}
 
 All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the 
 
@@ -125,7 +125,7 @@ Github relies on the security of git. In one scenario, such as pushing changes t
 Github has two major protections against cross-site-scripting (XSS) attacks. 
 
 
-\section{Significance}
+
 
 
 \bibliography{iap13}
