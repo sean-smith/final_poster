@@ -51,9 +51,9 @@
 {\end{list}}
 
 \department{Computer Science}
-\author{Sean Smith UROP advisor Richard West}
-\year{2015} \class{} \advisor{Richard West}
-\title{Designing an Autonomous Quadcopter}
+\author{Sean Smith, Kyle Holzinger, Amalia Safer}
+\year{2015} \class{Network Security} \advisor{Sharon Goldberg}
+\title{Security Analysis of Github}
 
 \providecommand{\bibtex}{{\rmfamily B\kern-.05em%
     \textsc{i\kern-.025em b}\kern-.08em%
@@ -70,17 +70,16 @@
 %Approach
 %results/observations
 
+%\begin{itemize} \item \end{itemize}
 
-\section{Quadcopter Characteristics}
 
-\begin{itemize}
-\item Uses 6 directional sonar sensors to navigate indoors
-\item Will run a version of SLAM called orthoslam that locates planes(walls indoors) and navigates based on a map of the surrounding planes
-\item Has four brushless motors that can lift 290 grams so it can lift a total of 775 grams counting the frame and electronics
-\item Has a flight time of 12 minutes on a 1300mah battery
-\end{itemize}
+\section{Cookies}
 
-\section{Motivation}
+A session cookie called \tt{user\_session} is stored which contains a seemingly random nonce. When a get request is made to \tt{https://github.com}, the cookie is sent and the database is queried to see if the cookie is valid. If the cookie is valid it will return user data as if the user is logged in. There are two more cookies of importance \tt{}
+
+
+
+\section{Ads}
 
 \begin{itemize}
 \item Improvements in hardware and battery technology make it feasible for the first time to fly for extended periods of time in small spaces.
