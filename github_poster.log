@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 APR 2015 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 APR 2015 16:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -568,6 +568,11 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 18.75632pt on input line 92.
 
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+\OT1/cmtt/m/n/24.88 Intel Mac OS X 10[]10[]2) AppleWebKit/537.36 (KHTML, like G
+ecko)
+ []
+
 No file github_poster.bbl.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
 (Font)              scaled to size 45.59985pt on input line 133.
@@ -604,7 +609,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  5967 strings out of 493117
  86292 string characters out of 6135433
- 143677 words of memory out of 5000000
+ 144677 words of memory out of 5000000
  9296 multiletter control sequences out of 15000+600000
  28508 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -618,7 +623,7 @@ ve/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2014
 dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2014/texmf-dist/fo
 nts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/typ
 e1/urw/palatino/uplri8a.pfb>
-Output written on github_poster.pdf (1 page, 79619 bytes).
+Output written on github_poster.pdf (1 page, 84914 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  29 compressed objects within 1 object stream

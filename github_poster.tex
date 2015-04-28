@@ -100,7 +100,7 @@ Github does not serve ads as it's business model revolves around selling premium
 
 \begin{enumerate}
 \item Google analytics sticks cookies %Which cookies and what do they do?
-\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, 
+\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. 
 \end{enumerate}
 
 
