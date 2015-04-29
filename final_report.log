@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 APR 2015 17:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 APR 2015 17:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -353,18 +353,9 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 ))
-./final_report.tex:33: Undefined control sequence.
-<argument> \undefinedpagestyle 
-                               
-l.33 \pagestyle{fancy}
-                      
-? 
 (./final_report.aux
 
 LaTeX Warning: Label `fig:mig_over' multiply defined.
-
-
-LaTeX Warning: Label `tracking' multiply defined.
 
 
 LaTeX Warning: Label `fig:mig_over' multiply defined.
@@ -372,24 +363,24 @@ LaTeX Warning: Label `fig:mig_over' multiply defined.
 )
 \openout1 = `final_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 41.
  (/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    ... okay on input line 41.
 
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -450,12 +441,12 @@ e
 ))
 \c@lstlisting=\count130
 \AtBeginShipoutBox=\box31
-LaTeX Font Info:    Try loading font information for U+msa on input line 36.
+LaTeX Font Info:    Try loading font information for U+msa on input line 42.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 36.
+LaTeX Font Info:    Try loading font information for U+msb on input line 42.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -463,69 +454,86 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-./final_report.tex:64: LaTeX Error: Not in outer par mode.
+./final_report.tex:83: LaTeX Error: \caption outside float.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.64 \begin
-           {tabular}{| l | p{7cm} | p{7cm} |}
+l.83 \caption
+             {Browser Fingerprint\newline}
 ? 
 
-Overfull \hbox (192.35233pt too wide) in paragraph at lines 64--76
-[][] 
+Overfull \hbox (221.72702pt too wide) in paragraph at lines 70--86
+[][]
  []
 
-
-Overfull \hbox (10.24316pt too wide) in paragraph at lines 86--87
+[2]
+Overfull \hbox (10.24316pt too wide) in paragraph at lines 92--93
 \OT1/cmr/m/n/12 Content se-cu-rity pol-icy or CSP is a way of whitelist-ing do-
 mains that github.com
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
-[2]
 
-./final_report.tex:90: LaTeX Error: Not in outer par mode.
+./final_report.tex:112: LaTeX Error: \caption outside float.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.90 \begin
-           {tabular}{| l | l | l | l | l | }
+l.112 \caption
+              {Subdomains\newline}
 ? 
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 115
+
+Overfull \hbox (2.47414pt too wide) in paragraph at lines 96--115
+[][]  \OT1/cmr/m/n/12 Sub-do-
+ []
+
+[3]
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 121
 .
-LaTeX Font Info:    No file OMScmtt.fd. on input line 115.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 121.
+
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 115.
+(Font)              for symbol `textbraceleft' on input line 121.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 115.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 121.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 115.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 121.
 
-<attack.png, id=17, 897.3525pt x 575.14874pt>
+<attack.png, id=20, 897.3525pt x 575.14874pt>
 File: attack.png Graphic file (type png)
  <use attack.png>
-Package pdftex.def Info: attack.png used on input line 123.
+Package pdftex.def Info: attack.png used on input line 129.
 (pdftex.def)             Requested size: 448.67514pt x 287.57367pt.
 
-Overfull \hbox (58.67514pt too wide) in paragraph at lines 123--124
- [][] 
+
+./final_report.tex:130: LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.130 \caption
+              {Diagram of our attack\newline}
+? 
+
+Overfull \hbox (58.67514pt too wide) in paragraph at lines 129--133
+[][]
  []
 
-[3] [4 <./attack.png>] [5] (./final_report.aux)
+[4 <./attack.png>] [5] (./final_report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -534,13 +542,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5992 strings out of 493117
- 82131 string characters out of 6135433
- 150301 words of memory out of 5000000
- 9340 multiletter control sequences out of 15000+600000
+ 5990 strings out of 493117
+ 82117 string characters out of 6135433
+ 152317 words of memory out of 5000000
+ 9338 multiletter control sequences out of 15000+600000
  17488 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,12n,37p,1053b,369s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,37p,1053b,224s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
@@ -549,7 +557,7 @@ r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loca
 l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on final_report.pdf (5 pages, 116682 bytes).
+Output written on final_report.pdf (5 pages, 119894 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  37 compressed objects within 1 object stream

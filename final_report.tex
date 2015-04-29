@@ -29,8 +29,14 @@
 {\begin{list}{}{\setlength{\leftmargin}{1em}}\item\small\bfseries}
 {\end{list}}
 
+\renewenvironment{figure}
+               {\def\@captype {figure}}
+               {}
 
-\pagestyle{fancy}
+\renewenvironment{table}
+               {\def\@captype {table}}
+               {}
+
 
 \begin{document}
 \maketitle
@@ -82,7 +88,7 @@ supercookie test                & 0.86                                     & 1.8
 \end{enumerate}
 
 %Section CSP
-\section{CSP}\label{tracking}
+\section{CSP}
 Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains the.\\
 
 \begin{figure}
