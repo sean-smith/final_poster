@@ -54,9 +54,6 @@ Github does not serve ads as it's business model revolves around selling premium
 \item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the {\tt user\_agent} header which contains information such as {\tt Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of unique identifying information is available. Enough to make me distinct in a pool of $5,000,000$ people.
 
 \begin{figure}
-
-
-
 \begin{table}
 \begin{tabular}{| l | p{7cm} | p{7cm} |}
 \hline
@@ -71,8 +68,6 @@ Are Cookies Enabled?            & 0.43                                     & 1.3
 supercookie test                & 0.86                                     & 1.81                                 \\ \hline
 \end{tabular}
 \end{table}
-
-
 \caption{Browser Fingerprint\newline}
 \label{fig:mig_over}
 \end{figure}
@@ -107,6 +102,37 @@ fortawesome.github.com & 44,500 & 0.29\%  \\ \hline
 \end{figure}
 
 
+section{SSL Everywhere}
+
+All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the \tt{Strict-Transport-Security} header to \tt{max-age=31536000; includeSubdomains; preload}. This ensures that for the next year, the browser will only accept connections from github.com over SSL. To further this Github is now included in the chrome STS file. This is a file that ships with Chrome and ensures that whenever Chrome goes to \url{github.com} it will only accept connections over SSL. Since Chrome is open source we dug up the STS (strict transport security) file and found the entry that corresponds to Chrome.
+
+\tt{\{ "name": "github.com", "include\_subdomains": true, "mode": "force-https" \}}
+
+
+\section{Git Commit Attack}
+Github relies on the security of Git which has much more security flaws than SSL. We demonstrate an attack the takes advantage of git (github) passwords stored in the clear.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.7]{attack.png}
+\caption{Diagram of our attack\newline}
+\label{fig:mig_over}
+\end{figure}
+
+\begin{enumerate}
+\item First the user clones the repository using the command\\ \tt{git clone https://kholzinger:<password>@github.com/kylelh/linkeffects}
+\item Then the user runs the Makefile, a standard procedure on any operating system.\\
+\tt{make}
+
+\item The \tt{Makefile} parses the git username and password which are stored in \tt{.git/config} file. The git username and password are also the \tt{github.com} username and password.
+\item We send the username, password, and ip address to the command and control server. We can then log into the users account.
+
+
+\end{enumerate}
+
+\section{XSS}
+
+Github has two major protections against cross-site-scripting (XSS) attacks. 
 
 
 
