@@ -137,7 +137,9 @@ fortawesome.github.com & 44,500 & 0.29\%  \\ \hline
 
 \section{SSL Everywhere}
 
-All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the \tt{Strict-Transport-Security} header to \tt{}
+All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the \tt{Strict-Transport-Security} header to \tt{max-age=31536000; includeSubdomains; preload}. This ensures that for the next year, the browser will only accept connections from github.com over SSL. To further this Github is now included in the chrome STS file. This is a file that ships with Chrome and ensures that whenever Chrome goes to \url{github.com} it will only accept connections over SSL. Since Chrome is open source we dug up the STS (strict transport security) file and found the entry that corresponds to Chrome.
+
+\tt{\{ "name": "github.com", "include\_subdomains": true, "mode": "force-https" \}}
 
 
 \section{Git Commit Attack}
