@@ -92,9 +92,9 @@ A session cookie called \tt{user\_session} is stored which contains a seemingly 
 
 When the user logs in, a post request is sent to \tt{https://github.com/session} with the username, password and authenticity token.
 
-One attack is to guess a random cookie and query to see if it's valid. There are approximately 8 million active github users at a time so roughly 8 million valid cookies. Since you don't need the \tt{logged\_in} cookie to be set correctly, you can construct a random cookie and check if it's valid. The length of the cookie is 80 characters and each character is from the universe (a-z, A-Z, 0-9, -, \_) which has a size of 64. Say the set of correct cookies $S$  has size $|S| = 8,000,000$, the universe $U$ has a size of $|U| = 64^{80}$. The probability of getting a correct cookie is so low that it's not a reasonable attack.
+One attack is to guess a random cookie and query to see if it's valid. There are approximately 8 million active github users at a time so roughly 8 million valid cookies. Since you don't need the \tt{logged\_in} cookie to be set correctly, you can construct a random cookie and check if it's valid. The length of the cookie is 80 characters and each character is from the universe (a-z, A-Z, 0-9, -, \_) which has a size of 64. Say the set of correct cookies $S$  has size $|S| = 8,000,000$, the universe $U$ has a size of $|U| = 64^{80}$. The probability of guessing a correct cookie $c$ is so low that it's not a reasonable attack.
 
-$$Pr[] \approx$$
+$$Pr[c \in S] = \frac{|S|}{|U|} \approx 10^{-138}$$
 
 
 
