@@ -4,6 +4,9 @@
 \usepackage{booktabs}
 \usepackage{subfigure}
 \usepackage{amsmath}
+\usepackage{listings}
+
+
 \usepackage{algpseudocode}
 \usepackage{alltt}
 \usepackage{textcomp}
@@ -82,15 +85,16 @@
 
 \section{Cookies}
 
-A session cookie called \tt{user\_session} is stored which contains a seemingly random nonce. When a get request is made to \tt{https://github.com}, the cookie is sent and the database is queried to see if the cookie is valid. If the cookie is valid it will return user data as if the user is logged in. There are two more cookies of importance \tt{logged\_in} which is a yes/no value and \tt{dotcom\_user} which is the user's username. To impersonate a user, only the \tt{user\_session} is needed, the \tt{logged\_in} cookie will always be yes and the \tt{dotcom\_user} will be filled by the server if the \tt{user\_session} cookie is valid. When the user logs out, the cookie is invalided by the server in a post request to \tt{https://github.com/logout} that contains the content type and an authenticity token. If an attacker is using the user's cookie and the user logs out, the attacker's cookie will be invalidated.
+A session cookie called \tt{user\_session} is stored which contains a seemingly random nonce. When a get request is made to \tt{https://github.com}, the cookie is sent and the database is queried to see if the cookie is valid. If the cookie is valid it will return user data as if the user is logged in. There are two more cookies of importance \tt{logged\_in} which is a yes/no value and \tt{dotcom\_user} which is the user's username. To impersonate a user, only the \tt{user\_session} is needed, the \tt{logged\_in} cookie will always be yes and the \tt{dotcom\_user} will be filled by the server if the \tt{user\_session} cookie is valid. When the user logs out, the cookie is invalided by the server in a post request to \tt{https://github.com/logout} that contains the content type and an authenticity token. The authenticity token is a random nonce that github uses to prevent against CSRF. If an attacker is using the user's cookie and the user logs out, the attacker's cookie will be invalidated.
 
-%Is there any way to get a new cookie without knowing the password?
+%Is there any way to get a new cookie without knowing the password? -- No only editing the cookie (which is the same as logging out)
 %What the fuck is the authenticity token? I think it's either a digital signature of the post data, a random nonce or token that the server knows to prevent csrf.
 
 When the user logs in, a post request is sent to \tt{https://github.com/session} with the username, password and authenticity token.
 
-One attack is to guess a random cookie and query to see if it's valid. There are approximately 8 million active github users at a time so roughly 8 million valid cookies. Since you don't need the \tt{logged\_in} cookie to be set correctly, you can construct a random cookie and check if it's valid. The length of the cookie is 80 characters and each character is from the universe (a-z, A-Z, 0-9, -, \_) which has a size of 64. Say the set of correct cookies $S$  has size $|S| = 8,000,000$, the universe $U$ has a size of $|U| = 64^{80}$
+One attack is to guess a random cookie and query to see if it's valid. There are approximately 8 million active github users at a time so roughly 8 million valid cookies. Since you don't need the \tt{logged\_in} cookie to be set correctly, you can construct a random cookie and check if it's valid. The length of the cookie is 80 characters and each character is from the universe (a-z, A-Z, 0-9, -, \_) which has a size of 64. Say the set of correct cookies $S$  has size $|S| = 8,000,000$, the universe $U$ has a size of $|U| = 64^{80}$. The probability of getting a correct cookie is so low that it's not a reasonable attack.
 
+$$Pr[] \approx$$
 
 
 
@@ -99,15 +103,36 @@ One attack is to guess a random cookie and query to see if it's valid. There are
 Github does not serve ads as it's business model revolves around selling premium subscriptions. However it does track users for analytics purposes via Google analytics. It does this in two ways:
 
 \begin{enumerate}
-\item Google analytics sticks cookies %Which cookies and what do they do?
-\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of identifying information enough to make me distinct in a pool of $5,000,000$ people.
+\item Google analytics sticks cookies on the user's browser. First it sticks a \tt{\_ga} cookie that expires in two years to distinguish between individual users, then it sticks a \tt{\_utma} cookie that expires in 30 years that is updated every time a request is sent to google analytics. %Which cookies and what do they do?
+\item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of unique identifying information is available. Enough to make me distinct in a pool of $5,000,000$ people.
 \end{enumerate}
 
 
 \section{CSP}
 
-Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains such names as
+Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains the.\\
 
+\begin{figure}
+\begin{table}
+\begin{tabular}{| l | l | l | l | l | }
+\hline
+
+Subdomain & Visitors & Percent of Daily Traffic \\ \hline
+github.com & 12,910,000 & 85.34\% \\ \hline
+gist.github.com & 1,237,000 & 8.18\%  \\ \hline
+help.github.com & 330,600 & 2.19\%  \\ \hline
+codeload.github.com & 206,500 & 1.37\%  \\ \hline
+twitter.github.com & 106,600 & 0.7\%  \\ \hline
+status.github.com & 89,100 & 0.59\%  \\ \hline
+windows.github.com & 87,700 & 0.58\%  \\ \hline
+divshot.github.com & 59,400 & 0.39\%  \\ \hline
+guides.github.com & 56,700 & 0.37\%  \\ \hline
+fortawesome.github.com & 44,500 & 0.29\%  \\ \hline
+\end{tabular}
+\end{table}
+\caption{Subdomains\newline}
+\label{fig:mig_over}
+\end{figure}
 
 
 \section{SSL Everywhere}
@@ -115,10 +140,26 @@ Content security policy or CSP is a way of whitelisting domains that github.com 
 All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the 
 
 
-\section{Attack Vectors}
-Github relies on the security of git. In one scenario, such as pushing changes to a repository that you don't own 
+\section{Git Commit Attack}
+Github relies on the security of Git which has much more security flaws than SSL. We demonstrate an attack the takes advantage of git (github) passwords stored in the clear.
+
+\begin{figure}
+\centering
+\includegraphics[scale=.7]{attack.png}
+\caption{Diagram of our attack\newline}
+\label{fig:mig_over}
+\end{figure}
+
+\begin{enumerate}
+\item First the user clones the repository using the command\\ \tt{git clone https://kholzinger:<password>@github.com/kylelh/linkeffects}
+\item Then the user runs the Makefile, a standard procedure on any operating system.\\
+\tt{make}
+
+\item The \tt{Makefile} parses the git username and password which are stored in \tt{.git/config} file. The git username and password are also the \tt{github.com} username and password.
+\item We send the username, password, and ip address to the command and control server. We can then log into the users account.
 
 
+\end{enumerate}
 
 \section{XSS}
 
