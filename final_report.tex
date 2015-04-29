@@ -65,14 +65,14 @@ Github does not serve ads as it's business model revolves around selling premium
 %2
 \item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the {\tt user\_agent} header which contains information such as {\tt Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of unique identifying information is available. Enough to make me distinct in a pool of $5,000,000$ people.
 
-%\begin{figure}
+\begin{figure}
 \begin{table}
 \begin{tabular}{| l | p{7cm} | p{7cm} |}
 \hline
 \textbf{Browser Characteristic} & \textbf{Bits of identifying information} & \textbf{One in x browsers have this} \\ \hline
-User Agent                      & 12.92                                    & 7752.4                               \\ \hline
-HTTP\_ACCEPT Headers            & 6.72                                     & 105.71                               \\ \hline
-Browser Plugin Details          & 11.11                                    & 2205.31                              \\ \hline
+User Agent & 12.92  & 7752.4 \\ \hline
+HTTP\_ACCEPT Headers   & 6.72   & 105.71  \\ \hline
+Browser Plugin Details          & 11.11 & 2205.31  \\ \hline
 Time Zone                       & 4.06                                     & 16.67                                \\ \hline
 Screen Size and Color Depth     & 4.18                                     & 18.16                                \\ \hline
 System Fonts                    & 17.21                                    & 151725.49                            \\ \hline
@@ -80,9 +80,9 @@ Are Cookies Enabled?            & 0.43                                     & 1.3
 supercookie test                & 0.86                                     & 1.81                                 \\ \hline
 \end{tabular}
 \end{table}
-%\caption{\newline}
-%\label{fig:mig_over}
-%\end{figure}
+\caption{\newline}
+\label{fig:mig_over}
+\end{figure}
 
 
 \end{enumerate}
@@ -91,8 +91,8 @@ supercookie test                & 0.86                                     & 1.8
 \section{CSP}
 Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains the.\\
 
-\begin{figure}
-\begin{table}
+%\begin{figure}
+%\begin{table}
 \begin{tabular}{| l | l | l | l | l | }
 \hline
 
@@ -109,9 +109,9 @@ guides.github.com & 56,700 & 0.37\%  \\ \hline
 fortawesome.github.com & 44,500 & 0.29\%  \\ \hline
 \end{tabular}
 \end{table}
-\caption{\newline}
-\label{fig:mig_over}
-\end{figure}
+%\caption{\newline}
+%\label{fig:mig_over}
+%\end{figure}
 
 
 \section{SSL Everywhere}
@@ -144,7 +144,11 @@ Github relies on the security of Git which has much more security flaws than SSL
 
 \section{XSS}
 
-Github has two major protections against cross-site-scripting (XSS) attacks. 
+Github has two major protections against cross-site-scripting (XSS) attacks. The first is the standard Ruby on Rails library to encode html tags as their number equivalent. So the \tt{$<$div$>$} tag is encoded as \tt{&lt;div&gt;} but still renders the name. The second defense against XSS is wrapping results from the html 
+
+\begin{lstlisting}
+<%=h "<p> will be preserved" %>
+\end{lstlisting}
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 APR 2015 17:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 APR 2015 17:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -353,14 +353,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 ))
-(./final_report.aux
-
-LaTeX Warning: Label `fig:mig_over' multiply defined.
-
-
-LaTeX Warning: Label `fig:mig_over' multiply defined.
-
-)
+(./final_report.aux)
 \openout1 = `final_report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -377,7 +370,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 41.
- (/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 41.
@@ -453,6 +447,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+./final_report.tex:83: LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 \caption
+             {\newline}
+? 
+
 Overfull \hbox (221.72702pt too wide) in paragraph at lines 70--86
 [][]
  []
@@ -474,14 +479,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 92--93
  []
 
 
-./final_report.tex:112: LaTeX Error: \caption outside float.
+./final_report.tex:111: LaTeX Error: \begin{document} ended by \end{table}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112 \caption
-              {\newline}
+l.111 \end{table}
+                 
+? 
+./final_report.tex:111: Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.111 \end{table}
+                 
 ? 
 [3]
 LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 121
@@ -522,22 +533,43 @@ Overfull \hbox (58.67514pt too wide) in paragraph at lines 129--133
 [][]
  []
 
-[4 <./attack.png>] [5] (./final_report.aux)
+[4 <./attack.png>]
+./final_report.tex:147: Misplaced alignment tab character &.
+<recently read> &
+                 
+l.147 ...$>$} tag is encoded as \tt{&lt; div &gt;}
+                                                  .
+? 
+./final_report.tex:147: Misplaced alignment tab character &.
+<argument> &lt; div &
+                     gt;
+l.147 ...$>$} tag is encoded as \tt{&lt; div &gt;}
+                                                  .
+? 
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 150.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 150.
+ [5]
+(./final_report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 5990 strings out of 493117
- 82117 string characters out of 6135433
- 152317 words of memory out of 5000000
- 9338 multiletter control sequences out of 15000+600000
+ 6009 strings out of 493117
+ 82429 string characters out of 6135433
+ 152278 words of memory out of 5000000
+ 9354 multiletter control sequences out of 15000+600000
  17488 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,8n,37p,1053b,222s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,37p,1053b,1082s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
@@ -546,7 +578,7 @@ r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loca
 l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on final_report.pdf (5 pages, 119887 bytes).
+Output written on final_report.pdf (5 pages, 120703 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  37 compressed objects within 1 object stream
