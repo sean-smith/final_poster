@@ -105,7 +105,37 @@ Github does not serve ads as it's business model revolves around selling premium
 \begin{enumerate}
 \item Google analytics sticks cookies on the user's browser. First it sticks a \tt{\_ga} cookie that expires in two years to distinguish between individual users, then it sticks a \tt{\_utma} cookie that expires in 30 years that is updated every time a request is sent to google analytics. %Which cookies and what do they do?
 \item In the rare event that the user removes these cookies, google analytics tries to fingerprint the user. It collects the browser, operating system, extensions installed, model of the computer and a couple other distinguishing factors. This is collected from the \tt{user\_agent} header which contains information such as \tt{Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_10\_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36}. Users who do not allow cookies are even easier to identify than other users as the server identifies that they don't allow cookies and then it's a smaller pool of people that they may be. The remaining identifying information is enough to identify the user. From my browser setup 22 bits of unique identifying information is available. Enough to make me distinct in a pool of $5,000,000$ people.
+
+\begin{figure}
+
+
+
+\begin{table}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Browser Characteristic} & \textbf{Bits of identifying information} & \textbf{One in x browsers have this} \\ \hline
+User Agent                      & 12.92                                    & 7752.4                               \\ \hline
+HTTP\_ACCEPT Headers            & 6.72                                     & 105.71                               \\ \hline
+Browser Plugin Details          & 11.11                                    & 2205.31                              \\ \hline
+Time Zone                       & 4.06                                     & 16.67                                \\ \hline
+Screen Size and Color Depth     & 4.18                                     & 18.16                                \\ \hline
+System Fonts                    & 17.21                                    & 151725.49                            \\ \hline
+Are Cookies Enabled?            & 0.43                                     & 1.35                                 \\ \hline
+supercookie test                & 0.86                                     & 1.81                                 \\ \hline
+\end{tabular}
+\end{table}
+
+
+\caption{Browser Fingerprint\newline}
+\label{fig:mig_over}
+\end{figure}
+
+
 \end{enumerate}
+
+
+
+
 
 
 \section{CSP}
