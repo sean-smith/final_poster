@@ -147,7 +147,7 @@ All connections to github.com are done via https. This is enforced via HTTP stri
 The browser is very strict against SSL, once the HSTS header is sent it does not request non-https pages. The command line client for GIT is much less secure. If a request is made like:\\ \tt{git clone http://github.com/sean-smith/example.git}\\ It first makes a request to \tt{github.com} over HTTP. The page then sends back a response with status code \tt{301 Moved Permanently} that redirects the browser to the https version. This leaks information such as the computer that the user is using, using the fingerprinting header method described earlier, the resource that the user is trying to access and potentially the username and the password of the user as described by an attack that we explain later.
 
 
-All of the subdomains that correspond to github send all of their traffic over ssl. Github has an alternate domain \url{github.io} that sends all traffic over http. Github.io solely hosts user created web pages. Github can neither vouch for or protect the authenticity of pages hosted in github.io and therefore does not provide authen  \\
+All of the subdomains that correspond to github send all of their traffic over ssl. Github has an alternate domain \url{github.io} that sends all traffic over http. Github.io solely hosts user created web pages. Github can neither vouch for or protect the authenticity of pages hosted in github.io and therefore does not provide authentication for .io pages.  \\
 
 \begin{figure}
 \begin{table}
@@ -173,7 +173,7 @@ guides.github.com & 56,700 & 0.37\%  \\ \hline
 
 %%%%%%%%%%%%%%%%\newpage
 
-\section{Git Commit Attack}
+\section{Git Clone Attack}
 Github relies on the security of Git which has much more security flaws than SSL. We demonstrate an attack the takes advantage of git (github) passwords stored in the clear.
 
 \begin{figure}
